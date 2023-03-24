@@ -5,14 +5,14 @@ function generateTeams() {
     const teamMembers = document.getElementById("team-members").value.split(",");
     if (teamMembers.length < 5) {
         alert('Please enter at least 5 names.');
-        return;
+        return; 
     }
     const shuffledMembers = shuffle(teamMembers);
     const teams = createTeams(shuffledMembers);
     displayResults(teams);
     saveToLocalStorage(teams);
     displayHistory();
-}
+} // end of generateTeams
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
