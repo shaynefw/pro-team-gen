@@ -19,6 +19,12 @@ team generator website that allows users to input a list of team members, and th
 
 ## Usage
 
+1. Clone or download the repository.
+2. Open index.html in your favorite web browser.
+3. Enter the team members' names in the textarea, separated by commas.
+4. Click the "Generate Teams" button.
+5. The generated teams will be displayed below the input form.
+
 ![screenShot](./assets/images/ss.html.png)
 
 ## Credits

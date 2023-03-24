@@ -1,10 +1,17 @@
 document.getElementById("generate-btn").addEventListener("click", generateTeams);
+document.getElementById("clear-history-btn").addEventListener("click", clearHistory);
 
 function generateTeams() {
     const teamMembers = document.getElementById("team-members").value.split(",");
+    if (teamMembers.length < 5) {
+        alert('Please enter at least 5 names.');
+        return;
+    }
     const shuffledMembers = shuffle(teamMembers);
     const teams = createTeams(shuffledMembers);
     displayResults(teams);
+    saveToLocalStorage(teams);
+    displayHistory();
 }
 
 function shuffle(array) {
@@ -34,3 +41,28 @@ function displayResults(teams) {
         resultsDiv.appendChild(teamDiv);
     });
 }
+
+function saveToLocalStorage(teams) {
+    const history = JSON.parse(localStorage.getItem("teamHistory")) || [];
+    history.push(teams);
+    localStorage.setItem("teamHistory", JSON.stringify(history));
+}
+
+function displayHistory() {
+    const historyList = document.getElementById("history-list");
+    historyList.innerHTML = "";
+    const history = JSON.parse(localStorage.getItem("teamHistory")) || [];
+    history.forEach((teams, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `Generation ${index + 1}`;
+        li.addEventListener("click", () => displayResults(teams));
+        historyList.appendChild(li);
+    });
+}
+
+function clearHistory() {
+    localStorage.removeItem("teamHistory");
+    displayHistory();
+}
+
+displayHistory();
